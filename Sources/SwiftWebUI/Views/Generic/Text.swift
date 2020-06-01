@@ -6,8 +6,10 @@
 //  Copyright © 2019 Helge Heß. All rights reserved.
 //
 
+#if canImport(Foundation)
 import class Foundation.Formatter
 import class Foundation.Bundle
+#endif
 
 public struct Text : Equatable, View {
   public typealias Body = Never
@@ -19,6 +21,7 @@ public struct Text : Equatable, View {
     self.init(verbatim: String(content))
   }
 
+#if canImport(Foundation)
   public init(_ key: LocalizedStringKey,
               tableName: String? = nil, bundle: Bundle? = nil,
               comment: StaticString? = nil)
@@ -32,7 +35,9 @@ public struct Text : Equatable, View {
                                    table: tableName)
     self.init(verbatim: s)
   }
+#endif
   
+#if canImport(Foundation)
   public init(_ value: Any?, formatter: Formatter) {
     // TBD: we could support attributed strings!
     #if os(Linux)
@@ -41,6 +46,7 @@ public struct Text : Equatable, View {
       self.init(verbatim: formatter.string(for: value) ?? "??")
     #endif
   }
+    #endif
   
   private init(runs: [ Run ]) {
     self.runs = runs

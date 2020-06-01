@@ -57,7 +57,7 @@ struct HTMLSelectNode: HTMLWrappingNode {
     defer { html += "</div>" }
     html += "<select"
     html.appendAttribute("id", selectWebID)
-    html.appendAttribute("onchange", "SwiftUI.selectChanged(this, event);")
+    html.appendAttribute("onchange", "SwiftUISelectChanged(this, event);")
     if !isEnabled { html.appendAttribute("disabled", "disabled") }
     html += ">"
     content.generateHTML(into: &html)

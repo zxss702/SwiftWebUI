@@ -46,7 +46,7 @@ struct SUIButtonNode: HTMLWrappingActionNode {
     html += "<button "
     html += "class=\"swiftui-button ui button\(disabledClass)\(activeClass)\""
     html.appendAttribute("id", elementID.webID)
-    html.appendAttribute("onclick", "SwiftUI.click(this,event);return false")
+    html.appendAttribute("onclick", "window.SwiftUIClick(this,event);return false")
     html += ">"
     defer { html += "</button>" }
     

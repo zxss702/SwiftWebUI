@@ -33,7 +33,7 @@ struct SUITabItemNode: HTMLWrappingNode {
     //       click handler.
     // onclick="activateTabItem(this)"
     
-    html.appendAttribute("onclick", "SwiftUI.tabClick(this,event);return false")
+    html.appendAttribute("onclick", "SwiftUITabClick(this,event);return false")
     
     html += ">"
     defer { html += "</a>" }

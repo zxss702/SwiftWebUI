@@ -6,8 +6,6 @@
 //  Copyright © 2019 Helge Heß. All rights reserved.
 //
 
-import Foundation
-
 public typealias CSSStyles = [ CSSStyleKey : CSSStyleValue ]
 
 public enum CSSStyleKey : String, Hashable {

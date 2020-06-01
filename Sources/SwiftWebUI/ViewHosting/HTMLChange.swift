@@ -28,7 +28,7 @@ public enum HTMLChange {
 
   case selectOneOption(selectID: String, optionID: String)
   
-  var jsonObject : [ String : Any ] {
+  var jsonObject : [ String : String ] {
     switch self {
       case .replaceElementWithHTML(let webID, let html):
         return [ "type": "replace-element", "id": webID, "content": html ]

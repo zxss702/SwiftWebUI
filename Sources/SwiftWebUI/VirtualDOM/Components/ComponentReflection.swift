@@ -68,12 +68,14 @@ enum ComponentTypeInfo: Equatable {
   import Glibc
 #endif
 
+#if canImport(NIO)
 fileprivate let lock : UnsafeMutablePointer<pthread_mutex_t> = {
-  let lock = UnsafeMutablePointer<pthread_mutex_t>.allocate(capacity: 1)
-  let err = pthread_mutex_init(lock, nil)
+    let lock = UnsafeMutablePointer<pthread_mutex_t>.allocate(capacity: 1)
+    let err = pthread_mutex_init(lock, nil)
   precondition(err == 0, "could not initialize lock")
   return lock
 }()
+#endif
 fileprivate var _componentTypeCache = [ ObjectIdentifier : ComponentTypeInfo ]()
 
 extension View {
@@ -82,15 +84,23 @@ extension View {
     // FIXME: static func ;-)
     let typeOID = ObjectIdentifier(type(of: self))
     
+#if canImport(NIO)
     pthread_mutex_lock(lock)
+#endif
     let cachedData = _componentTypeCache[typeOID]
+#if canImport(NIO)
     pthread_mutex_unlock(lock)
+#endif
     if let ti = cachedData { return ti }
     
     let newType = ComponentTypeInfo(reflecting: Self.self) ?? .static
+#if canImport(NIO)
     pthread_mutex_lock(lock)
+#endif
     _componentTypeCache[typeOID] = newType
+#if canImport(NIO)
     pthread_mutex_unlock(lock)
+#endif
     return newType
   }
   

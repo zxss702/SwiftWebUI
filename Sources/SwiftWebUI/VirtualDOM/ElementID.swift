@@ -82,6 +82,11 @@ public struct ElementID: Hashable, CustomStringConvertible {
     eid.appendElementIDComponent(id)
     return eid
   }
+  func deletingLastElementIDComponent() -> ElementID {
+    var eid = self
+    eid.deleteLastElementIDComponent()
+    return eid
+  }
 
   
   // MARK: - Matching
@@ -113,6 +118,11 @@ extension Int: WebRepresentableIdentifier {
 }
 
 extension String: WebRepresentableIdentifier {
+#if !canImport(Foundation)
+    func replacingOccurrences<Replacement: StringProtocol>(of target: Character, with replacement: Replacement) -> Self {
+        String(split(separator: target).joined(separator: replacement))
+    }
+#endif
   var webID: String {
     // FIXME
     // lame-o. Not sure what is best here.
@@ -130,17 +140,20 @@ extension AnyHashable: WebRepresentableIdentifier {
   }
 }
 
-
+#if canImport(NIO)
 import class NIOConcurrencyHelpers.NIOAtomic
+#endif
 
 // A super lame workaround to deal with arbitrary hash values. Its size is
 // unbounded ;-)
 // OKayish for testing, but warn the user to use `WebRepresentableIdentifier`s.
 fileprivate var elementIDComponentToWebID = [ AnyHashable: String ]()
+#if canImport(NIO)
   // TODO: make threadsafe
 fileprivate var xIDSequence =
                   NIOAtomic.makeAtomic(value: Int.random(in: 0...31011973))
 fileprivate let xIDPrefix   = "X"
+#endif
 
 extension ElementID { // WebID
 
@@ -166,8 +179,12 @@ extension ElementID { // WebID
   
   static func makeWebID(for id: AnyHashable) -> String {
     if let webID = elementIDComponentToWebID[id] { return webID }
+#if canImport(NIO)
     let sv = xIDSequence.add(1)
     let webID = xIDPrefix + String(sv, radix: 16, uppercase: true)
+#else
+    let webID = String(Int.random(in: 0...31011973).advanced(by: 1), radix: 16, uppercase: true)
+#endif
     elementIDComponentToWebID[id] = webID
     #if DEBUG && false
       print("WARN: registering custom webID for non-standard ID:",

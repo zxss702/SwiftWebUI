@@ -6,7 +6,9 @@
 //  Copyright © 2019 Helge Heß. All rights reserved.
 //
 
-import class Foundation.Formatter
+#if canImport(Foundation)
+    import class Foundation.Formatter
+#endif
 
 public struct TextField: View {
 
@@ -29,6 +31,8 @@ public struct TextField: View {
     self.onEditingChanged = onEditingChanged
     self.onCommit         = onCommit
   }
+
+#if canImport(Foundation)
   public init<T>(_ binding        : Binding<T>,
                  placeholder      : Text? = nil,
                  formatter        : Formatter,
@@ -38,6 +42,7 @@ public struct TextField: View {
     self.init(binding.formatter(formatter), placeholder: placeholder,
               onEditingChanged: onEditingChanged, onCommit: onCommit)
   }
+#endif
   
   init(secureText text: Binding<String>, placeholder: Text? = nil,
        onCommit: (() -> Void)? = nil)

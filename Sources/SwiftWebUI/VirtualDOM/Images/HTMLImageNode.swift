@@ -6,8 +6,10 @@
 //  Copyright © 2019 Helge Heß. All rights reserved.
 //
 
-import struct Foundation.Data
-import class  Foundation.Bundle
+#if canImport(Foundation)
+    import struct Foundation.Data
+    import class  Foundation.Bundle
+#endif
 
 struct HTMLImageNode: HTMLLeafNode {
   
@@ -19,26 +21,31 @@ struct HTMLImageNode: HTMLLeafNode {
   
   private var url : String? {
     switch storage {
+#if canImport(Foundation)
       case .url(let url, _):
         return url.absoluteString
-
+#endif
       case .icon:
         return nil
-      
+
+#if canImport(Foundation)
       case .bundleImage(let name, let bundle, _):
         let bundle = bundle ?? Bundle.main
-        #if true // NIOEndpoint
+        #if canImport(NIO) // NIOEndpoint
           return NIOEndpoint.shared.url(forResource: name, in: bundle)
         #else
           return bundle.dataURL(forResource: name, withExtension: nil)
         #endif
-
       case .data(let data, let mimeType):
         // TBD: We could also hook it up under a NIOEndpoint URL. Maybe
         //      depending on it's size? (that would actually be pretty good
         //      given that the images can be quite large).
         guard !data.isEmpty else { return nil }
         return data.generateDataURL(using: mimeType)
+#else
+      case .urlString(let url, _):
+        return url
+#endif
       
       #if canImport(CoreGraphics)
         case .cgImage(let image, _, _):
@@ -54,8 +61,11 @@ struct HTMLImageNode: HTMLLeafNode {
     switch storage {
       case .icon(let classes):
         return classes + " " + scale.cssStringValue
-      
+    #if canImport(Foundation)
       case .url, .bundleImage, .data: return nil
+    #else
+      case .urlString: return nil
+    #endif
       #if canImport(CoreGraphics)
         case .cgImage: return nil
       #endif
@@ -98,6 +108,13 @@ struct HTMLImageNode: HTMLLeafNode {
       .setAttribute(webID: elementID.webID,
                     attribute: "src", value: url ?? "")
     )
+    
+    if let classes = classes {
+      changeset.append(
+        .setAttribute(webID: elementID.webID,
+                      attribute: "class", value: "swiftui-image icon \(classes)")
+      )
+    }
   }
 
   // MARK: - Debugging
@@ -119,6 +136,7 @@ extension Image.Scale : CSSStyleValue {
   }
 }
 
+#if canImport(Foundation)
 extension Bundle {
   
   func dataURL(forResource name: String, withExtension e: String?) -> String? {
@@ -143,3 +161,4 @@ extension Data {
   }
   
 }
+#endif

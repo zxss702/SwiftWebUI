@@ -6,8 +6,9 @@
 //  Copyright © 2019 Helge Heß. All rights reserved.
 //
 
-import struct Foundation.URL
-import struct Foundation.URLComponents
+#if canImport(Foundation)
+    import struct Foundation.URL
+    import struct Foundation.URLComponents
 
 // https://source.unsplash.com
 public struct UnsplashSource {
@@ -71,3 +72,4 @@ public struct UnsplashSource {
   }
 }
 
+#endif

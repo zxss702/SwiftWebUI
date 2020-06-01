@@ -5,7 +5,9 @@
 //  Created by Helge Heß on 27.06.19.
 //
 
+#if canImport(SemanticUI)
 import SemanticUI
+#endif
 
 public enum SwiftWebUI {
   
@@ -28,6 +30,7 @@ public enum SwiftWebUI {
    *       }
    *     }
    */
+#if canImport(NIO)
   public static func serve<V: View>(port : Int    = 1337,
                                     host : String = "0.0.0.0",
                                     waitUntilDone: Bool = true,
@@ -37,6 +40,7 @@ public enum SwiftWebUI {
     
     let fonts  = "themes/default/assets/fonts"
     let images = "themes/default/assets/images"
+#if canImport(SemanticUI)
     let resources = [
       "semantic.min.css"             : SemanticUI.data_semantic_min_css,
       "components/icon.min.css"      : SemanticUI.data_icon_min_css,
@@ -46,6 +50,9 @@ public enum SwiftWebUI {
       "\(fonts)/outline-icons.svg"   : SemanticUI.data_outline_icons_svg,
       "\(images)/flags.png"          : SemanticUI.data_flags_png
     ]
+#else
+    let resources = [String:String]()
+#endif
     for ( name, value ) in resources {
       endpoint.expose(value, as: name)
     }
@@ -71,4 +78,5 @@ public enum SwiftWebUI {
   {
     serve(port: port, host: host, waitUntilDone: waitUntilDone) { return view }
   }
+#endif
 }

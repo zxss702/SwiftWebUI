@@ -45,15 +45,17 @@ enum VerticalSizeClassEnvironmentKey: EnvironmentKey {
   static var defaultValue: UserInterfaceSizeClass? { return .regular }
 }
 
-import struct Foundation.Locale
-import struct Foundation.TimeZone
+#if canImport(Foundation)
+    import struct Foundation.Locale
+    import struct Foundation.TimeZone
 
-enum LocaleEnvironmentKey: EnvironmentKey {
-  static var defaultValue: Locale { return .current }
-}
-enum TimeZoneEnvironmentKey: EnvironmentKey {
-  static var defaultValue: TimeZone { return .current }
-}
+    enum LocaleEnvironmentKey: EnvironmentKey {
+      static var defaultValue: Locale { return .current }
+    }
+    enum TimeZoneEnvironmentKey: EnvironmentKey {
+      static var defaultValue: TimeZone { return .current }
+    }
+#endif
 
 enum EnvironmentObjectKey<O: ObservableObject>: EnvironmentKey {
   static var defaultValue: O? { return nil }
@@ -106,14 +108,17 @@ extension EnvironmentValues {
     get { self[VerticalSizeClassEnvironmentKey.self] }
   }
   
+#if canImport(Foundation)
   public var locale: Locale {
     set { self[LocaleEnvironmentKey.self] = newValue}
     get { self[LocaleEnvironmentKey.self] }
   }
+
   public var timeZone: TimeZone {
     set { self[TimeZoneEnvironmentKey.self] = newValue}
     get { self[TimeZoneEnvironmentKey.self] }
   }
+#endif
 }
 
 // MARK: - View Access
@@ -168,10 +173,12 @@ public extension View {
     return environment(\.verticalSizeClass, sizeClass)
   }
 
+#if canImport(Foundation)
   func locale(_ locale: Locale) -> EnvironmentView<Locale> {
     return environment(\.locale, locale)
   }
   func timeZone(_ timeZone: TimeZone) -> EnvironmentView<TimeZone> {
     return environment(\.timeZone, timeZone)
   }
+    #endif
 }

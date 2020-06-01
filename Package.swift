@@ -17,9 +17,9 @@ let package = Package(
   
   name: "SwiftWebUI",
   
-  platforms: [
-    .macOS(.v10_15), .iOS(.v13)
-  ],
+   platforms: [
+     .macOS(.v10_15), .iOS(.v13)
+   ],
   
   products: [
     .library   (name: "SwiftWebUI", targets: [ "SwiftWebUI" ]),
@@ -27,20 +27,22 @@ let package = Package(
   ],
   
   dependencies: [
-    .package(url: "https://github.com/apple/swift-nio.git",
+    /* .package(url: "https://github.com/apple/swift-nio.git",
              from: "2.13.0"),
     .package(url: "https://github.com/SwiftWebResources/SemanticUI-Swift.git",
-             from: "2.3.4"),
-    .package(url: "https://github.com/wickwirew/Runtime.git",
-             from: "2.1.1")
+             from: "2.3.4"), */
+    .package(url: "https://github.com/MaxDesiatov/Runtime",
+             .branch("wasi-build")),
+    .package(url: "https://github.com/kateinoigakukun/JavaScriptKit", .revision("1edcf70")),
   ] + extraPackages,
   
   targets: [
     .target(name: "SwiftWebUI",
-            dependencies: [ 
-                "NIO", "NIOHTTP1", "NIOConcurrencyHelpers", 
-                "Runtime", "SemanticUI" 
+            dependencies: [
+                /* "NIO", "NIOHTTP1", "NIOConcurrencyHelpers",  */
+                "Runtime", /* "SemanticUI" */
+                "JavaScriptKit"
             ] + extraDependencies),
-    .target(name: "HolyCow", dependencies: [ "SwiftWebUI" ])
+    .target(name: "HolyCow", dependencies: [ "SwiftWebUI", "JavaScriptKit" ] + extraDependencies)
   ]
 )

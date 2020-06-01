@@ -86,6 +86,12 @@ public final class TreeStateContext: CustomStringConvertible {
     return environmentStack.last ?? EnvironmentValues.empty
   }
 
+  // MARK: - Build Origin
+  enum BuildOrigin {
+    case initial, event
+  }
+  
+  var buildOrigin: BuildOrigin = .initial
   
   // MARK: - Traits
   

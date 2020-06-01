@@ -47,7 +47,7 @@ struct SUIListItemNode<Selection: SelectionManager>: HTMLWrappingNode {
     try content.invoke(webID, in: context)
   }
 
-  var onClickValue: String { return "SwiftUI.click(this,event);return false" }
+  var onClickValue: String { return "SwiftUIClick(this,event);return false" }
 
   func generateHTML(into html: inout String) {
     html += "<div class=\"item"

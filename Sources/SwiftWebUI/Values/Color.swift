@@ -6,8 +6,6 @@
 //  Copyright © 2019 Helge Heß. All rights reserved.
 //
 
-import Foundation
-
 public enum Color : Hashable, CustomStringConvertible, CSSStyleValue {
 
   case rgb  (_ value: UInt32)

@@ -41,6 +41,10 @@ extension ObjectIdentifier {
          : s
   }
   var shortRawPointerString: String {
+#if canImport(Foundation)
     rawPointerString.replacingOccurrences(of: "0x0000000", with: "0x")
+#else
+    return rawPointerString
+#endif
   }
 }

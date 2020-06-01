@@ -116,7 +116,7 @@ struct SUIToggleNode: HTMLWrappingNode {
     html += "<input type='checkbox'"
     html.appendAttribute("id", elementID.webID)
     html.appendAttribute("value", v)
-    html.appendAttribute("onchange", "SwiftUI.checkboxChanged(this);")
+    html.appendAttribute("onchange", "SwiftUICheckboxChanged(this);")
     if isOn       { html.appendAttribute("checked", "checked") }
     if !isEnabled { html.appendAttribute("disabled", "disabled") }
     html += ">"

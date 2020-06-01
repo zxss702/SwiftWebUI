@@ -6,11 +6,13 @@
 //  Copyright © 2019 Helge Heß. All rights reserved.
 //
 
-import struct Foundation.UUID
+#if canImport(Foundation) && canImport(NIO)
+    import struct Foundation.UUID
 
-extension NIOHostingSession {
-  static func createSessionID() -> String {
-    // As discussed in https://github.com/swiftwebui/SwiftWebUI/issues/4
-    return UUID().uuidString
-  }
-}
+    extension NIOHostingSession {
+      static func createSessionID() -> String {
+        // As discussed in https://github.com/swiftwebui/SwiftWebUI/issues/4
+        return UUID().uuidString
+      }
+    }
+#endif

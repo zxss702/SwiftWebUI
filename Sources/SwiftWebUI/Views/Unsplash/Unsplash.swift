@@ -6,6 +6,7 @@
 //  Copyright © 2019 Helge Heß. All rights reserved.
 //
 
+#if canImport(Foundation)
 extension Image {
   
   public init(_ source: UnsplashSource, label: Text? = nil) {
@@ -32,3 +33,4 @@ extension Image {
     return unsplash(scope: scope, time: time, size: size, terms: terms)
   }
 }
+#endif

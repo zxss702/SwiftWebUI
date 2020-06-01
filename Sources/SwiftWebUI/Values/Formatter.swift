@@ -6,6 +6,8 @@
 //  Copyright © 2019 Helge Heß. All rights reserved.
 //
 
+#if canImport(Foundation)
+
 import class Foundation.Formatter
 import class Foundation.NSString
 
@@ -86,4 +88,6 @@ extension Binding where Value == String {
     )
   }
 }
+#endif
+
 #endif

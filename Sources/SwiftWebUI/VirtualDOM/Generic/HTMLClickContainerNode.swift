@@ -23,7 +23,7 @@ struct HTMLClickContainerNode: HTMLWrappingActionNode {
   var clickHandler : String {
     return isDouble ? "ondblclick" : "onclick"
   }
-  var onClickValue: String { return "SwiftUI.click(this,event); return false" }
+  var onClickValue: String { return "window.SwiftUIClick(this,event); return false" }
   
   func generateChanges(from   oldNode : HTMLTreeNode,
                        into changeset : inout [ HTMLChange ],

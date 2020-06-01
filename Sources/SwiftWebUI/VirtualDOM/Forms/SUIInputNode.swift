@@ -54,8 +54,8 @@ struct SUIInputNode: HTMLLeafNode {
     html.appendAttribute("id", elementID.webID)
     if let s = placeholder { html.appendAttribute("placeholder", s) }
     html.appendAttribute("value", value)
-    html.appendAttribute("oninput",  "SwiftUI.valueChanged(this);")
-    html.appendAttribute("onchange", "SwiftUI.valueCommit(this);")
+    html.appendAttribute("oninput",  "SwiftUIValueChanged(this);")
+    html.appendAttribute("onchange", "SwiftUIValueCommit(this);")
     html += ">"
     html += "</div>"
   }

@@ -6,8 +6,6 @@
 //  Copyright © 2019-2020 Helge Heß. All rights reserved.
 //
 
-import Foundation
-
 public extension View {
 
   func tabItem<V: View>(_ item: V) -> some View {

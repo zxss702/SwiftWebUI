@@ -6,6 +6,7 @@
 //  Copyright © 2019 Helge Heß. All rights reserved.
 //
 
+#if canImport(NIO)
 import NIO
 import NIOHTTP1
 
@@ -106,8 +107,9 @@ public extension ServerResponse {
 
 }
 
+#if canImport(Foundation)
 import Foundation
-
+#endif
 
 // MARK: - JSON
 
@@ -162,3 +164,4 @@ public extension ServerResponse {
     #endif
   }
 }
+#endif

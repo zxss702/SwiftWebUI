@@ -6,8 +6,11 @@
 //  Copyright © 2019 Helge Heß. All rights reserved.
 //
 
-import class Foundation.JSONSerialization
+#if canImport(Foundation)
+    import class Foundation.JSONSerialization
+#endif
 
+#if canImport(NIO)
 final class NIOHostingSession {
   
   typealias SwiftUIEvent = NIOEndpoint.SwiftUIEvent
@@ -198,3 +201,4 @@ final class NIOHostingSession {
     }
   }
 }
+#endif

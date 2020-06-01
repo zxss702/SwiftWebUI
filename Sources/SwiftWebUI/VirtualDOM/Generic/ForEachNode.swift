@@ -141,7 +141,8 @@ struct ForEachNode<ID: Hashable> : HTMLTreeNode {
       }
       else {
         changeset.append(
-          .insertElementWithHTML(webID: eid.webID, after: nil, html: html)
+//        .insertElementWithHTML(webID: eid.webID, after: nil, html: html)
+          .replaceElementContentsWithHTML(webID: elementID.deletingLastElementIDComponent().webID, html: html)
         )
       }
     }

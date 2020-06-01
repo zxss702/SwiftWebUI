@@ -6,13 +6,17 @@
 //  Copyright © 2019 Helge Heß. All rights reserved.
 //
 
-import class  Foundation.Bundle
-import struct Foundation.Data
-import struct Foundation.URL
-import struct Foundation.URLComponents
-import struct Foundation.URLQueryItem
-import NIO
-import NIOHTTP1
+#if canImport(Foundation)
+    import class  Foundation.Bundle
+    import struct Foundation.Data
+    import struct Foundation.URL
+    import struct Foundation.URLComponents
+    import struct Foundation.URLQueryItem
+#endif
+#if canImport(NIO)
+    import NIO
+    import NIOHTTP1
+#endif
 
 // The HTTP endpoint hosting the Views. This is really just a quick hack
 // based on some SwiftObjects and MicroExpress code.
@@ -28,7 +32,7 @@ import NIOHTTP1
 // P.S. I originally had this as a SwiftObjects
 //      `WORequestHandler` / `WOViewHostingComponent` setup.
 //      Ping me if interested.
-
+#if canImport(NIO)
 public final class NIOEndpoint {
   
   public static let shared = NIOEndpoint()
@@ -383,3 +387,4 @@ let WOExtensionToMimeType : [ String : String ] = [
   "xml"  : "text/xml",
   "ico"  : "image/x-icon"
 ]
+#endif

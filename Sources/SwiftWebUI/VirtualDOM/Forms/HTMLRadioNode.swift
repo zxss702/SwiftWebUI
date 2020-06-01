@@ -75,7 +75,7 @@ struct HTMLRadioNode<S: Hashable>: HTMLWrappingNode {
     html.appendAttribute("name",  baseID.webID)
     html.appendAttribute("id",    inputID)
     html.appendAttribute("value", webID) // yeah, not great
-    html.appendAttribute("onchange", "SwiftUI.radioChanged(this, event);")
+    html.appendAttribute("onchange", "SwiftUIRadioChanged(this, event);")
     if isSelected { html.appendAttribute("checked",  "checked")  }
     if !isEnabled { html.appendAttribute("disabled", "disabled") }
     html += " />"
