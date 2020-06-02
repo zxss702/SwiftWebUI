@@ -87,6 +87,9 @@ public final class TreeStateContext: CustomStringConvertible {
   }
 
   // MARK: - Build Origin
+  
+  /// This is for `onAppear`
+  /// We set the value to `event` after the first build of the tree so the action gets run once.
   enum BuildOrigin {
     case initial, event
   }

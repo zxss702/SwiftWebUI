@@ -119,9 +119,9 @@ extension Int: WebRepresentableIdentifier {
 
 extension String: WebRepresentableIdentifier {
 #if !canImport(Foundation)
-    func replacingOccurrences<Replacement: StringProtocol>(of target: Character, with replacement: Replacement) -> Self {
-        String(split(separator: target).joined(separator: replacement))
-    }
+  func replacingOccurrences<Replacement: StringProtocol>(of target: Character, with replacement: Replacement) -> Self {
+    String(split(separator: target).joined(separator: replacement))
+  }
 #endif
   var webID: String {
     // FIXME

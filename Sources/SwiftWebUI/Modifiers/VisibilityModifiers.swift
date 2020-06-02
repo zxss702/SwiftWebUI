@@ -4,8 +4,6 @@
 //
 //  Created by Carson Katri on 5/28/20.
 //
-import JavaScriptKit
-fileprivate let waitForElem = JSObjectRef.global.waitForElem.function
 
 public extension View {
   func onAppear(perform action: (() -> Void)? = nil) -> some View {
@@ -17,6 +15,9 @@ struct OnLoadModifier: ViewModifier {
   let action: () -> Void
   
   func buildTree<T: View>(for view: T, in context: TreeStateContext) -> HTMLTreeNode {
+    // This is hacked in pretty poorly, but it works.
+    // We really need a way to track this per-View.
+    // Not sure how to go about that yet.
     if context.buildOrigin == .initial {
       action()
     }

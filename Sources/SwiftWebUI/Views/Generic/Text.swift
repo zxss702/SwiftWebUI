@@ -46,7 +46,7 @@ public struct Text : Equatable, View {
       self.init(verbatim: formatter.string(for: value) ?? "??")
     #endif
   }
-    #endif
+#endif
   
   private init(runs: [ Run ]) {
     self.runs = runs
