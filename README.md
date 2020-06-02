@@ -26,6 +26,14 @@ npx carson-katri/swiftwebui-scripts create MyApp
 ```
 For more information on `swiftwebui-scripts`, view the [repo](https://github.com/carson-katri/swiftwebui-scripts).
 
+## Helpful Packages
+* [swiftwebui-router](https://github.com/carson-katri/swiftwebui-router)
+  
+  *A simple Router for SwiftWebUI*
+* [JavaScriptKit](https://github.com/kateinoigakukun/JavaScriptKit)
+  
+  *Swift framework to interact with JavaScript through WebAssembly*
+
 ## Contributing
 You can build the project with the following command:
 ```sh
