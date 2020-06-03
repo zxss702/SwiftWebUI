@@ -39,6 +39,14 @@ struct HTMLPaddingNode: HTMLWrappingNode {
           if edges.contains(.top)      { styles[.paddingTop]    = applyLength }
           if edges.contains(.leading)  { styles[.paddingLeft]   = applyLength }
           if edges.contains(.trailing) { styles[.paddingRight]  = applyLength }
+          if edges.contains(.horizontal) {
+            styles[.paddingLeft]   = applyLength
+            styles[.paddingRight]  = applyLength
+          }
+          if edges.contains(.vertical) {
+            styles[.paddingTop]     = applyLength
+            styles[.paddingBottom]  = applyLength
+          }
           return styles
       }
     }()

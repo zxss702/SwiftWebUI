@@ -36,9 +36,11 @@ html, body {
   display: flex;
 }
 
+/*
 .swiftui-padder {
   padding: 0.5rem 0.5rem 0.5rem 0.5rem;
 }
+*/
 
 .swiftui-scroll {
   overflow-y: scroll;
