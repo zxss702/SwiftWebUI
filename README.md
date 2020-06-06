@@ -33,6 +33,9 @@ For more information on `swiftwebui-scripts`, view the [repo](https://github.com
 * [JavaScriptKit](https://github.com/kateinoigakukun/JavaScriptKit)
   
   *Swift framework to interact with JavaScript through WebAssembly*
+  
+## Examples
+* [Firebase Cloud Functions](https://github.com/1amageek/SwiftWebUI-WASM-CFs)
 
 ## Contributing
 You can build the project with the following command:
