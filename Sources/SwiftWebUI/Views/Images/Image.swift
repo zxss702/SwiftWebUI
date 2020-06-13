@@ -68,7 +68,8 @@ extension HTMLTreeBuilder {
   {
     return HTMLImageNode(elementID : context.currentElementID,
                          storage   : view.storage,
-                         scale     : context.environment.imageScale)
+                         scale     : context.environment.imageScale,
+                         resizable : false)
   }
   
 }

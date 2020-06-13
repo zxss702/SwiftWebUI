@@ -18,6 +18,7 @@ struct HTMLImageNode: HTMLLeafNode {
   let elementID : ElementID
   let storage   : ImageStorage
   let scale     : Image.Scale
+  let resizable : Bool
   
   private var url : String? {
     switch storage {
@@ -77,6 +78,9 @@ struct HTMLImageNode: HTMLLeafNode {
     //                        support for extracting plain text)
     if let url = url {
       html += "<img class=\"swiftui-image\""
+      if resizable {
+        html += "style=\"width: inherit; height: inherit;\""
+      }
       html.appendAttribute("id",  elementID.webID)
       if let classes = classes { html.appendAttribute("class", classes) }
       html.appendAttribute("src", url)
@@ -85,12 +89,18 @@ struct HTMLImageNode: HTMLLeafNode {
     else if let classes = classes {
       // https://semantic-ui.com/elements/icon.html
       html += "<i class=\"swiftui-image icon \(classes)\""
+      if resizable {
+        html += "style=\"width: inherit; height: inherit;\""
+      }
       html.appendAttribute("id",  elementID.webID)
       html += "></i>"
     }
     else {
       // Hmmmmm. We might need to replace the thing
       html += "<img class=\"swiftui-image\""
+      if resizable {
+        html += "style=\"width: inherit; height: inherit;\""
+      }
       html.appendAttribute("id",  elementID.webID)
       html += " />"
     }
