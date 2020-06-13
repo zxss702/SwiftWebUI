@@ -91,13 +91,12 @@ div.swiftui-list > div.item > button.ui.button.active
   display        : flex;
   flex-direction : row;
   align-items    : stretch;
-  border         : 1px solid rgba(34, 36, 38, .15);
   border-radius  : .28571429rem; /* SemanticUI :-) */
+  width: 100%;
+  height: 100%;
 }
 .swiftui-navigation .swiftui-nav-sidebar {
-  flex-grow      : 1;
   border-right   : 1px solid rgba(34, 36, 38, .15);
-  width          : 30%;
 }
 .swiftui-navigation .swiftui-nav-content {
   flex-grow      : 10;
