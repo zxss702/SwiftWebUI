@@ -31,8 +31,8 @@ let package = Package(
              from: "2.13.0"),
     .package(url: "https://github.com/SwiftWebResources/SemanticUI-Swift.git",
              from: "2.3.4"), */
-    .package(url: "https://github.com/MaxDesiatov/swift-aws-lambda-runtime.git",
-             .branch("wasi-build")),
+    .package(url: "https://github.com/wickwirew/Runtime",
+             .branch("master")),
     .package(url: "https://github.com/kateinoigakukun/JavaScriptKit", .revision("1edcf70")),
   ] + extraPackages,
   
